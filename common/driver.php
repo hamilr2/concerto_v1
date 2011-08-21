@@ -38,7 +38,7 @@ class ScreenDriver{
 	
     function screen_details(){
         if(isset($this->screen_id)){
-            $sql = "SELECT screen.width as screen_width, screen.height as screen_height, template.id as template_id, field.id as field_id, field.left, field.top, field.width, field.height, field.style
+            $sql = "SELECT screen.width as screen_width, screen.height as screen_height, template.id as template_id, field.id as field_id, field.left, field.top, field.width, field.height, field.style, field.stretch
 			FROM screen
 			LEFT JOIN template ON screen.template_id = template.id
 			LEFT JOIN field ON field.template_id = template.id
@@ -55,6 +55,7 @@ class ScreenDriver{
                 $screen_details['fields'][$data['field_id']]['width'] = $data['width'] * $width;
                 $screen_details['fields'][$data['field_id']]['height'] = $data['height'] * $height;
                 $screen_details['fields'][$data['field_id']]['style'] = $data['style'];
+                $screen_details['fields'][$data['field_id']]['stretch'] = $data['stretch'];
             }
             return $screen_details;
         } else {

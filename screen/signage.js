@@ -132,7 +132,7 @@
             					                start();
                                             });
                                     } else if(json["mime_type"].match(/image/)){
-                                        var imgSrc = "image.php?file=" + escape(json["content"]) + "&width=" + field["width"] + "&height=" + field["height"];
+                                        var imgSrc = "image.php?file=" + escape(json["content"]) + "&width=" + field["width"] + "&height=" + field["height"] + "&stretch=" + field["stretch"];
                                         //load the image to cache
                                         var img = new Image();
                                         //set onload event handler

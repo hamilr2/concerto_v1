@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `field` (
   `top` float unsigned NOT NULL COMMENT 'Location of top side',
   `width` float unsigned NOT NULL COMMENT 'Width of box',
   `height` float unsigned NOT NULL COMMENT 'Height of box',
+  `stretch` float NOT NULL COMMENT 'Scale (for non-native displays)',
   PRIMARY KEY  (`id`),
   KEY `template_id` (`template_id`),
   KEY `content-type_id` (`type_id`)

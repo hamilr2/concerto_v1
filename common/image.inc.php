@@ -25,6 +25,7 @@
  */
 function resize($filename, $new_width = false, $new_height = false, $stretch = false){
     list($width, $height, $type_int) = getimagesize($filename);
+    
     if(!$stretch) {
         if(!$new_width || !$new_height) {
 	        $new_width = $width;
@@ -41,6 +42,28 @@ function resize($filename, $new_width = false, $new_height = false, $stretch = f
                 $new_height = $new_width / $ratio;
             }
         }
+    }
+    else if($stretch != 1)
+    {
+      if(!$new_width || !$new_height) {
+	        $new_width = $width;
+	        $new_height = $height;
+      } else {
+            $ratio = $width / $height;
+            $new_ratio = $new_width / $new_height;
+
+            if($ratio < $new_ratio) {
+                $new_height = $new_height;
+                $new_width = $new_height * $ratio;
+            } else {
+                $new_width = $new_width;
+                $new_height = $new_width / $ratio;
+            }
+        }
+      if($stretch > 0)
+        $new_width = $new_width * $stretch;
+      if($stretch < 0)
+        $new_height = $new_height * $stretch * (-1);
     }
 
     $new_image = imagecreatetruecolor($new_width, $new_height);

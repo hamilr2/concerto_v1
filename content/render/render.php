@@ -27,7 +27,7 @@
 function render($type, $filename, $width = false, $height = false, $stretch = false){
 	$fileinfo = split("\.", $filename);
 	if($type == 'image'){
-		$cache_path = IMAGE_DIR . 'cache/' . $fileinfo[0] . '_' . $width . '_' . $height . '.' . $fileinfo[1];
+		$cache_path = IMAGE_DIR . 'cache/' . $fileinfo[0] . '_' . $width . '_' . $height . '_' . $stretch . '.' . $fileinfo[1];
 		$path = IMAGE_DIR . $filename;
 	} elseif ($type == 'template'){
 		$cache_path = TEMPLATE_DIR . 'cache/' . $fileinfo[0] . '_' . $width . '_' . $height . '.' . $fileinfo[1];
@@ -46,7 +46,7 @@ function render($type, $filename, $width = false, $height = false, $stretch = fa
     if(defined('MEMCACHE_ENABLE') && MEMCACHE_ENABLE){
       $memcache = new Memcache();
       $memcached_connected = $memcache->addServer(MEMCACHE_SERVER,(int)MEMCACHE_PORT);
-      $key = $filename . '_' . $width . '_' . $height;
+      $key = $filename . '_' . $width . '_' . $height . '_' . $stretch;
     }
     
     //lets render the image!
