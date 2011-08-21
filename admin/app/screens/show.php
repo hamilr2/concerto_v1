@@ -41,20 +41,19 @@
 <?php
 }
 
-   if ($this->screen->width/$this->screen->height==(16/9)){
-      $ratio = "16:9";
-      if ($this->screen->is_connected()) {
-      	if (!$this->screen->get_powerstate()) {
-					$scrimg="screen_169_asleep_big.png";
-				}
-				else {
-					$scrimg="screen_169_on_big.png";
-				}
-      } else {
-      	$scrimg="screen_169_off_big.png";
-      }
-   } else if ($this->screen->width/$this->screen->height==(16/10)) {
-      $ratio = "16:10";
+   function gcd($a, $b){
+      $b = ( $a == 0 )? 0 : $b;
+      return ( $a % $b )? gcd($b, abs($a - $b)) : $b;
+   }
+   $w = $this->screen->width;
+   $h = $this->screen->height;
+
+   $gcd = gcd($w,$h);
+   $ratio = $w/$gcd . ":" . $h/$gcd;
+   if($ratio == "8:5") // special case to use a standard resolution
+     $ratio = "16:10";
+
+   if ($this->screen->width/$this->screen->height>1.4){
       if ($this->screen->is_connected()) {
       	if (!$this->screen->get_powerstate()) {
 					$scrimg="screen_169_asleep_big.png";
@@ -66,7 +65,6 @@
       	$scrimg="screen_169_off_big.png";
       }
    } else {
-      $ratio = "4:3";
       if ($this->screen->is_connected()) {
       	if (!$this->screen->get_powerstate()) {
       		$scrimg="screen_43_asleep_big.png";

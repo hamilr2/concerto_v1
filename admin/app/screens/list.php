@@ -29,25 +29,8 @@
 <h2>Click on the name of a screen to view its details. <a href="<?= ADMIN_URL ?>/pages/show/docs/19#s1"><img class="icon" border="0" src="<?= ADMIN_BASE_URL ?>images/help_button.gif" alt="Extra Help" title="Extra Help" /></a></h2>
 <?php
 foreach($this->screens as $screen){
-   if ($screen->width/$screen->height==(16/9)){
-      if ($screen->is_connected()) {
-      	if (!$screen->get_powerstate()) {
-					$status = "Asleep";
-					$statcolor = "#aa0";
-					$scrimg="screen_169_asleep.png";
-				}
-				else {
-					$status = "Online";
-					$statcolor = "green";
-					$scrimg="screen_169_on.png";
-				}
-      } else {
-      	$statcolor = "red";
-      	$status = "Offline";
-      	$scrimg="screen_169_off.png";
-      }
-   } else if ($screen->width/$screen->height==(16/10)) {
-      if ($screen->is_connected()) {
+   if ($screen->width/$screen->height>1.4){
+     if ($screen->is_connected()) {
       	if (!$screen->get_powerstate()) {
 					$status = "Asleep";
 					$statcolor = "#aa0";
